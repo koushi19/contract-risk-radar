@@ -1,0 +1,19 @@
+SERVICE AGREEMENT
+
+1. SCOPE OF WORK
+The Contractor shall provide software development services as described in Exhibit A. The Contractor warrants that all services will be performed in a professional and workmanlike manner.
+
+2. PAYMENT TERMS
+Client agrees to pay all invoices within 15 days of receipt. Late payments will incur a penalty of 10% per day, compounded daily.
+
+3. TERM AND TERMINATION
+Either party may terminate this agreement with 30 days written notice. However, the Vendor may terminate this agreement at any time for any reason with 24 hours notice if the Client is in breach.
+
+4. AUTOMATIC RENEWAL
+This agreement shall automatically renew for successive one-year terms unless either party provides written notice of non-renewal at least 60 days prior to the end of the then-current term.
+
+5. INDEMNIFICATION
+The Client shall indemnify and hold harmless the Vendor from any and all claims, damages, losses, and expenses, including attorney fees, arising out of or resulting from the Client's use of the services, with no upper limit on the amount recoverable by the Vendor.
+
+6. CONFIDENTIALITY
+Both parties agree to keep all shared information confidential for a period of three years following the termination of this agreement.
