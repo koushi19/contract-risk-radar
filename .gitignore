@@ -5,5 +5,4 @@ venv/
 model.joblib
 *.pdf
 *.docx
-data.csv
 .DS_Store
