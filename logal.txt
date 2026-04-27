@@ -1,0 +1,141 @@
+TAKE-HOME ASSIGNMENT
+Clause Risk Radar
+Legal NLP · ML Classification · Flask · 48 Hours
+Build a contract analysis tool that reads raw legal text and surfaces clause-level risk —
+automatically.
+
+1. Problem Statement
+Legal contracts carry clauses of materially different risk. A single overlooked term — uncapped
+liability, a hidden auto-renewal, a one-sided termination right — can have serious
+consequences.
+Build a web application that accepts a contract as input and returns a structured, clause-level
+risk report. The output must be readable and actionable by someone with no legal or technical
+background.
+Input is accepted in three ways:
+• Copy-paste raw contract text into a textarea
+• Upload a .txt file
+• Upload a .pdf file
+
+2. User Roles
+Reviewer Pastes or uploads a contract and reads the risk report. No technical
+
+background assumed.
+
+Evaluator Runs the submitted app locally and verifies output quality and code
+
+structure.
+
+3. User Flow
+3.1 Input
+A single page with three mutually exclusive input methods — textarea, .txt upload, .pdf upload.
+If multiple are provided, priority order is: pdf → txt → textarea. One submit action triggers
+analysis.
+
+Clause Risk Radar · Confidential
+
+3.2 Results
+On submission, the same page (or a new route) renders the full report in this order:
+1. Summary card — total clauses, risk distribution, top 3 flagged clauses
+2. Clause-by-clause breakdown
+3. Back link to re-submit
+
+4. Functional Requirements
+4.1 Clause Segmentation
+• Split contract into logical, semantically complete units
+• Clauses under 10 words must merge with the preceding clause
+• Maximum display length per clause: 300 characters — truncate with ellipsis
+• Minimum 3 clauses required — return a user-facing error if fewer produced
+
+4.2 Risk Classification
+Each clause must be assigned one of three labels. The decision logic is the candidate&#39;s to
+design.
+
+Label Definition
+Safe Standard, balanced clause. Mutual obligations, reasonable terms, no penalty
+
+language.
+
+Review Unusual or one-sided terms. Warrants attention but not immediately dangerous.
+Risky Uncapped liability, unilateral termination, hidden auto-renewal, unlimited
+
+indemnification.
+
+4.3 Training Data Construction
+• Hand-label a minimum of 60 clauses covering all three risk classes
+• Document class distribution in the README
+• The classifier must be trained — not a rule engine
+• Output a confidence score (0.0 – 1.0) alongside each label
+• Serialize the trained model — load at startup, not per request
+
+4.4 Report Output
+Summary card must include:
+
+Clause Risk Radar · Confidential
+
+• Total clause count
+• Count per risk label
+• Top 3 highest-risk clauses by confidence
+Per-clause card must include:
+• Clause number and truncated text
+• Risk label and confidence score
+• One plain-English reasoning string — specific to that clause, not a label echo
+
+5. Non-Functional Requirements
+Response time Analysis of a 2,000-word contract completes under 10 seconds on a
+
+standard laptop.
+
+Portability App starts with a single command after dependency install. No manual
+
+setup steps beyond that.
+
+Code structure Route handlers contain no business logic. Pipeline lives in a separate
+
+module.
+
+Dependencies All packages pinned to exact versions. Python 3.9+ compatible.
+No external APIs No hosted AI or LLM endpoints. All intelligence is built and owned by
+
+the candidate.
+
+Model loading Trained model loaded once at startup — not retrained on each
+
+request.
+
+6. Acceptance Criteria
+Functional
+4. All three input methods work — textarea, .txt upload, .pdf upload.
+5. Each clause card shows a reasoning string specific to that clause&#39;s content.
+6. Summary card correctly counts clauses and lists top 3 by risk confidence.
+7. The three sample clauses below produce the expected risk labels.
+
+Technical
+8. App starts cleanly after dependency install with a single command.
+9. No business logic inside route functions.
+10. Model is serialized and loaded at startup — not retrained per request.
+
+Clause Risk Radar · Confidential
+
+11. All dependencies are pinned in the requirements file.
+
+Submission
+12. GitHub repository with meaningful commit history — not a single bulk push.
+13. README covers: setup, design decisions, known limitations.
+
+7. Sample Test Cases
+Verify your pipeline against these three inputs before submitting.
+
+�� Risky
+The Client shall indemnify and hold harmless the Vendor from any and all claims, damages, losses,
+and expenses, including attorney fees, arising out of or resulting from the Client&#39;s use of the
+services, with no upper limit on the amount recoverable by the Vendor.
+Uncapped indemnification — unilateral obligation on Client with no liability ceiling.
+
+�� Safe
+Either party may terminate this agreement with 30 days written notice.
+Mutual termination right — reasonable notice period, no penalty language.
+
+�� Review
+This agreement shall automatically renew for successive one-year terms unless either party provides
+written notice of non-renewal at least 60 days prior to the end of the then-current term.
+Auto-renewal present — 60-day notice window is tight and may trap inattentive parties.

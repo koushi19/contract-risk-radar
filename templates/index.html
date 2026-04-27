@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clause Risk Radar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Clause Risk Radar</h1>
+            <p>Upload your contract and let AI surface legal risks in seconds.</p>
+        </header>
+
+        <main class="glass-card">
+            <form action="/" method="POST" enctype="multipart/form-data" id="analysisForm">
+                {% if error %}
+                <div class="alert error">{{ error }}</div>
+                {% endif %}
+
+                <div class="input-grid">
+                    <div class="input-section">
+                        <h3>1. Upload PDF</h3>
+                        <div class="file-upload-zone">
+                            <input type="file" name="file_pdf" id="file_pdf" accept=".pdf">
+                            <label for="file_pdf">Click to upload PDF</label>
+                        </div>
+                    </div>
+
+                    <div class="input-section">
+                        <h3>2. Upload TXT</h3>
+                        <div class="file-upload-zone">
+                            <input type="file" name="file_txt" id="file_txt" accept=".txt">
+                            <label for="file_txt">Click to upload TXT</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-section full-width">
+                    <h3>3. Or Paste Contract Text</h3>
+                    <textarea name="textarea_text" placeholder="Paste raw contract clauses here..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Analyze Contract</button>
+            </form>
+        </main>
+
+        <footer>
+            <p>Priority Order: PDF > TXT > Textarea</p>
+        </footer>
+    </div>
+</body>
+</html>

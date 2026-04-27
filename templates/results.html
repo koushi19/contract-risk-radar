@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs"></div>
+
+    <div class="container wide">
+        <header>
+            <h1>Risk Analysis Report</h1>
+            <a href="/" class="btn-secondary">← Re-submit New Contract</a>
+        </header>
+
+        <section class="summary-grid">
+            <div class="summary-card glass-card">
+                <span class="label">Total Clauses</span>
+                <span class="value">{{ summary.total_clauses }}</span>
+            </div>
+            <div class="summary-card glass-card risky">
+                <span class="label">Risky</span>
+                <span class="value">{{ summary.risk_distribution.Risky }}</span>
+            </div>
+            <div class="summary-card glass-card review">
+                <span class="label">Review</span>
+                <span class="value">{{ summary.risk_distribution.Review }}</span>
+            </div>
+            <div class="summary-card glass-card safe">
+                <span class="label">Safe</span>
+                <span class="value">{{ summary.risk_distribution.Safe }}</span>
+            </div>
+        </section>
+
+        <section class="top-flags glass-card">
+            <h3>Top 3 Highest Risk Flags</h3>
+            <div class="flags-list">
+                {% for flag in summary.top_3 %}
+                <div class="flag-item">
+                    <span class="badge {{ flag.label.lower() }}">{{ flag.label }}</span>
+                    <span class="confidence">{{ (flag.confidence * 100)|round }}% Confidence</span>
+                    <p>{{ flag.text }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="clause-breakdown">
+            <h3>Clause-by-Clause Breakdown</h3>
+            <div class="clause-list">
+                {% for res in results %}
+                <div class="clause-card glass-card {{ res.label.lower() }}">
+                    <div class="clause-header">
+                        <span class="number">#{{ res.number }}</span>
+                        <span class="badge {{ res.label.lower() }}">{{ res.label }}</span>
+                        <span class="confidence">{{ (res.confidence * 100)|round }}% Confidence</span>
+                    </div>
+                    <div class="clause-body">
+                        <p class="text">"{{ res.text }}"</p>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong> {{ res.reasoning }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</body>
+</html>
