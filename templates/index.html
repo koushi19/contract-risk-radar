@@ -13,39 +13,48 @@
     <div class="container">
         <header>
             <h1>Clause Risk Radar</h1>
-            <p>Upload your contract and let AI surface legal risks in seconds.</p>
+            <p>Deploying advanced NLP to identify uncapped liability, hidden auto-renewals, and one-sided termination rights in seconds.</p>
         </header>
 
         <main class="glass-card">
             <form action="/" method="POST" enctype="multipart/form-data" id="analysisForm">
                 {% if error %}
-                <div class="alert error">{{ error }}</div>
+                <div class="alert error">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    {{ error }}
+                </div>
                 {% endif %}
 
                 <div class="input-grid">
                     <div class="input-section">
-                        <h3>1. Upload PDF</h3>
-                        <div class="file-upload-zone">
-                            <input type="file" name="file_pdf" id="file_pdf" accept=".pdf">
-                            <label for="file_pdf">Click to upload PDF</label>
+                        <h3>1. Document Upload (PDF)</h3>
+                        <div class="file-upload-zone" onclick="document.getElementById('file_pdf').click()">
+                            <input type="file" name="file_pdf" id="file_pdf" accept=".pdf" style="display: none;">
+                            <div class="upload-content">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="margin-bottom: 10px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
+                                <label for="file_pdf">Select Contract PDF</label>
+                            </div>
                         </div>
                     </div>
 
                     <div class="input-section">
-                        <h3>2. Upload TXT</h3>
-                        <div class="file-upload-zone">
-                            <input type="file" name="file_txt" id="file_txt" accept=".txt">
-                            <label for="file_txt">Click to upload TXT</label>
+                        <h3>2. Raw Text File (TXT)</h3>
+                        <div class="file-upload-zone" onclick="document.getElementById('file_txt').click()">
+                            <input type="file" name="file_txt" id="file_txt" accept=".txt" style="display: none;">
+                            <div class="upload-content">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="margin-bottom: 10px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                <label for="file_txt">Select Text File</label>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="input-section full-width">
-                    <h3>3. Or Paste Contract Text</h3>
-                    <textarea name="textarea_text" placeholder="Paste raw contract clauses here..."></textarea>
+                    <h3>3. Instant Analysis (Paste)</h3>
+                    <textarea name="textarea_text" placeholder="Paste your contract clauses here for instant risk scanning..."></textarea>
                 </div>
 
-                <button type="submit" class="btn-primary">Analyze Contract</button>
+                <button type="submit" class="btn-primary">Execute Risk Scan</button>
             </form>
         </main>
 
